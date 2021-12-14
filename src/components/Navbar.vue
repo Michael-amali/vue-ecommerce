@@ -1,6 +1,6 @@
 <template>
   <v-card class="">
-    <v-app-bar color="deep-purple accent-4" dark>
+    <v-app-bar color="deep-purple accent-4" dark fixed>
       <v-toolbar-title>Akata</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn text>Home</v-btn>
@@ -14,19 +14,12 @@
         class="hidden-md-and-up"
       ></v-app-bar-nav-icon>
 
-      <!-- <v-btn text outlined class="hidden-sm-and-down"> Get Started</v-btn> -->
-
       <v-dialog
         v-model="credentialDialog"
         max-width="600px"
         class="credentialDialog"
       >
         <template v-slot:activator="{}">
-          <!-- <span
-            @click="credentialDialog = true"
-            class="primary1--text hoverCursor"
-            >advent@amalitech.org</span
-          > -->
           <v-btn
             text
             outlined
@@ -37,10 +30,6 @@
           >
         </template>
         <v-card>
-          <!-- <v-card-title class="d-flex justify-center">
-            <span class="text-h5">Complaints</span>
-          </v-card-title> -->
-
           <v-card-text>
             <v-tabs v-model="tab" centered background-color="">
               <v-tabs-slider></v-tabs-slider>
@@ -184,7 +173,7 @@
             <v-list-item-icon>
               <v-icon>mdi-{{ item.icon }}</v-icon>
             </v-list-item-icon>
-            <v-list-item-content>
+            <v-list-item-content @click="popUpDrawer(item)">
               <v-list-item-title v-text="item.text"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -318,6 +307,15 @@ export default {
           }
           console.log(error);
         });
+    },
+    popUpDrawer(item) {
+      if (item.text == "Login") {
+        this.tab = "tab-1";
+        this.credentialDialog = true;
+      } else if (item.text == "Sign Up") {
+        this.tab = "tab-2";
+        this.credentialDialog = true;
+      }
     },
   },
 
