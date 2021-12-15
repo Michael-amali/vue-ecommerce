@@ -12,44 +12,46 @@
             rem quod itaque vero obcaecati! Reiciendis voluptates, ipsam quas
             hic
           </p>
-          <v-card class="mx-auto my-12" max-width="674">
-            <v-form
-              ref="ProductForm"
-              v-model="productFormValid"
-              lazy-validation
-            >
-              <v-card-text>
-                <v-container>
-                  <v-card-text class="text-center pa-0 text-h6">
-                    Add Product
-                  </v-card-text>
-                  <v-text-field
-                    label="Product Name"
-                    name="name"
-                    :rules="nameRules"
-                    v-model="product.productName"
-                    type="text"
-                    color="primary"
-                    required
-                    placeholder="Product Name"
-                  ></v-text-field>
-                  <v-text-field
-                    label="Price"
-                    name="price"
-                    :rules="priceRules"
-                    v-model="product.productPrice"
-                    type="number"
-                    color="primary"
-                    required
-                    placeholder="Product price"
-                  ></v-text-field>
-                  <v-btn color="primary darken-1" block @click="saveData">
-                    Save Data
-                  </v-btn>
-                </v-container>
-              </v-card-text>
-            </v-form>
-          </v-card>
+          <v-dialog v-model="addProductDialog" max-width="590">
+            <v-card>
+              <v-form
+                ref="ProductForm"
+                v-model="productFormValid"
+                lazy-validation
+              >
+                <v-card-text>
+                  <v-container>
+                    <v-card-text class="text-center pa-0 text-h6">
+                      Add Product
+                    </v-card-text>
+                    <v-text-field
+                      label="Product Name"
+                      name="name"
+                      :rules="nameRules"
+                      v-model="product.productName"
+                      type="text"
+                      color="primary"
+                      required
+                      placeholder="Product Name"
+                    ></v-text-field>
+                    <v-text-field
+                      label="Price"
+                      name="price"
+                      :rules="priceRules"
+                      v-model="product.productPrice"
+                      type="number"
+                      color="primary"
+                      required
+                      placeholder="Product price"
+                    ></v-text-field>
+                    <v-btn color="primary darken-1" block @click="saveData">
+                      Save Data
+                    </v-btn>
+                  </v-container>
+                </v-card-text>
+              </v-form>
+            </v-card>
+          </v-dialog>
         </v-col>
         <v-col class="col-md-6">
           <v-img src="../assets/svg/product.svg"></v-img>
@@ -60,7 +62,9 @@
           <hr />
           <h1 class="d-inline">Product List</h1>
           <!-- <v-spacer></v-spacer> -->
-          <v-btn class="float-right primary darken-1">Add Product</v-btn>
+          <v-btn class="float-right primary darken-1" @click="addProduct()"
+            >Add Product</v-btn
+          >
           <table>
             <col style="width: 35%" />
             <col style="width: 30%" />
@@ -177,6 +181,7 @@ export default {
       },
       products: [],
       editDialog: false,
+      addProductDialog: false,
       activeItem: null,
       productFormValid: true,
       snackBarText: "",
@@ -203,6 +208,7 @@ export default {
           this.snackbar = true;
           this.upgradeValue = true;
           this.snackBarText = "Product added successfully";
+          this.addProductDialog = false;
           // this.readData();
           this.watcher();
           console.log("Document written with ID: ", docRef.id);
@@ -245,6 +251,12 @@ export default {
       // save the item id to the activeItem so we can have access to it in updateProduct() function
       this.activeItem = product.id;
       this.product = product.data();
+    },
+    addProduct() {
+      this.addProductDialog = true;
+      // save the item id to the activeItem so we can have access to it in updateProduct() function
+      // this.activeItem = product.id;
+      // this.product = product.data();
     },
     updateProduct() {
       db.collection("products")
