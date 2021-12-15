@@ -109,7 +109,7 @@
                             name="name"
                             :rules="nameRules"
                             v-model="signUpName"
-                            type="email"
+                            type="text"
                             color="primary"
                             required
                             placeholder="Name"
@@ -271,6 +271,7 @@ export default {
           this.snackbar = true;
           this.upgradeValue = true;
           this.snackBarText = "Sign Up was successful";
+          this.$router.push("/admin/overview");
           console.log(user);
         })
         .catch((error) => {
@@ -293,7 +294,7 @@ export default {
           this.snackbar = true;
           this.upgradeValue = true;
           this.snackBarText = "Login was successful";
-          this.$router.push("/about");
+          this.$router.push("/admin/overview");
           console.log(user);
         })
         .catch(function (error) {

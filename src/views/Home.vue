@@ -23,9 +23,9 @@
           <v-flex xs12 sm4 class="my-3">
             <div class="text-xs-center">
               <h2 class="headline">The best way to share your amazing stuff</h2>
-              <span class="subheading">
+              <div class="subheading text-center">
                 No more restrictions, no more limits
-              </span>
+              </div>
             </div>
           </v-flex>
           <v-flex xs12>
@@ -56,8 +56,10 @@
                 <v-flex xs12 md4>
                   <v-card class="elevation-0 transparent">
                     <v-card-text class="text-xs-center">
-                      <v-icon x-large class="blue--text text--lighten-2"
-                        >mdi-flash_on</v-icon
+                      <v-icon
+                        x-large
+                        class="blue--text d-flex justify-center text--lighten-2"
+                        >mdi-kodi</v-icon
                       >
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
