@@ -2,6 +2,14 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
+import Vue from "vue";
+import VueFiretore from "vue-firestore";
+require("firebase/firestore");
+
+Vue.use(VueFiretore, {
+  key: "id", // the name of the property. Default is '.key'.
+  enumerable: true, //  whether it is enumerable or not. Default is true.
+});
 
 const firebaseConfig = {
   apiKey: "AIzaSyD58QK4lL52xv_WTNcmwtsaB0q1RIozZJU",
