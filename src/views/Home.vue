@@ -31,29 +31,37 @@
           <v-flex xs12>
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
-                <v-flex xs12 md4>
+                <v-flex xs12 md4 v-for="(product, idx) in products" :key="idx">
                   <v-card class="elevation-0 transparent">
-                    <v-card-text class="text-xs-center">
-                      <v-icon
-                        x-large
-                        class="blue--text d-flex justify-center text--lighten-2"
-                        >mdi-account</v-icon
+                    <carousel :perPage="1">
+                      <slide
+                        v-for="(image, idx) in product.images"
+                        :key="idx"
+                        class="d-flex justify-center"
                       >
-                    </v-card-text>
+                        <v-img :src="image" width="300"></v-img>
+                      </slide>
+                    </carousel>
+                    <v-card-text class="text-xs-center"> </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Reach the world</div>
+                      <div class="headline text-xs-center">
+                        {{ product.price | currency("₵") }}
+                      </div>
                     </v-card-title>
                     <v-card-text>
-                      Show your stuff to the whole community of Endorfine not
-                      only to your mum or your friends. We love making good
-                      content viral. In this moment Endorfine is used by artists
-                      who are not famous but that want to share their works to
-                      the world. Unfortunately with other social networks this
-                      is hard, slow and sometime expensive.
+                      {{ product.description }}
                     </v-card-text>
+                    <v-card-action class="d-flex justify-center">
+                      <AddToCart
+                        :product-image="getImage(product.images)"
+                        :product-id="product.id"
+                        :price="product.price"
+                        :name="product.name"
+                      />
+                    </v-card-action>
                   </v-card>
                 </v-flex>
-                <v-flex xs12 md4>
+                <!-- <v-flex xs12 md4>
                   <v-card class="elevation-0 transparent">
                     <v-card-text class="text-xs-center">
                       <v-icon
@@ -95,7 +103,7 @@
                       people from your city, your state and your universe!
                     </v-card-text>
                   </v-card>
-                </v-flex>
+                </v-flex> -->
               </v-layout>
             </v-container>
           </v-flex>
@@ -158,11 +166,57 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import AddToCart from "@/components/AddToCart.vue";
 export default {
   name: "Home",
 
   components: {
     Navbar,
+    AddToCart,
+  },
+  data() {
+    return {
+      products: [
+        {
+          name: "Watch 1",
+          description:
+            "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
+          images: [
+            "https://res.cloudinary.com/cloudfisk/image/upload/v1628246011/catalog/images/large/short1.jpg",
+            "https://res.cloudinary.com/cloudfisk/image/upload/v1628246011/catalog/images/large/short1.jpg",
+          ],
+          price: 99.99,
+          id: "1",
+        },
+        {
+          name: "Watch 2",
+          description:
+            "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
+          images: [
+            "https://res.cloudinary.com/cloudfisk/image/upload/v1628246012/catalog/images/large/blue-tshirt1.jpg",
+            "../assets/svg/product.svg",
+          ],
+          price: 99.92,
+          id: "2",
+        },
+        {
+          name: "Watch 3",
+          description:
+            "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
+          images: [
+            "https://res.cloudinary.com/cloudfisk/image/upload/v1628246000/catalog/images/large/suit002.jpg",
+            "../assets/svg/product.svg",
+          ],
+          price: 99.97,
+          id: "3",
+        },
+      ],
+    };
+  },
+  methods: {
+    getImage(images) {
+      return images[0];
+    },
   },
 };
 </script>
