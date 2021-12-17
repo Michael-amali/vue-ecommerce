@@ -203,7 +203,7 @@
   </v-card>
 </template>
 <script>
-import { auth } from "../firebase.js";
+import { auth, db } from "../firebase.js";
 
 export default {
   name: "Navbar",
@@ -267,6 +267,17 @@ export default {
       auth
         .createUserWithEmailAndPassword(this.signUpEmail, this.signUpPassword)
         .then((user) => {
+          db.collection("profiles")
+            .doc(user.user.uid)
+            .set({
+              name: this.signUpName,
+            })
+            .then(() => {
+              console.log("Document successfully written!");
+            })
+            .catch((error) => {
+              console.error("Error writing document: ", error);
+            });
           this.credentialDialog = false;
           this.snackbar = true;
           this.upgradeValue = true;

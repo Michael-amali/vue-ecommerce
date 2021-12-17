@@ -38,7 +38,7 @@
           <v-img src="../assets/legoMan.jpg"></v-img>
         </v-list-item-avatar>
 
-        <v-list-item-title class="subtitle-1">Gangster Lego</v-list-item-title>
+        <v-list-item-title class="subtitle-1">{{ email }}</v-list-item-title>
         <v-btn icon @click.stop="mini = !mini">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
@@ -78,10 +78,13 @@ export default {
   data() {
     return {
       drawer: true,
+      name: null,
+      email: null,
       items: [
         { title: "Overview", icon: "mdi-kodi", link: "/admin/overview" },
         { title: "Products", icon: "mdi-redhat", link: "/admin/products" },
         { title: "Orders", icon: "mdi-gift", link: "/admin/orders" },
+        { title: "Profiles", icon: "mdi-account", link: "/admin/profiles" },
       ],
       mini: false,
       menuList: [{ title: "LogOut" }],
@@ -98,6 +101,11 @@ export default {
           console.log(err);
         });
     },
+  },
+  created() {
+    let user = auth.currentUser;
+    this.name = user.displayName;
+    this.email = user.email;
   },
 };
 </script>
