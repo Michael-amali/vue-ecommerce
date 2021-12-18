@@ -3,9 +3,9 @@
     <v-app-bar color="deep-purple accent-4" dark fixed>
       <v-toolbar-title>Akata</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn text>Home</v-btn>
+        <v-btn text @click="goToHome">Home</v-btn>
         <v-btn text>Products</v-btn>
-        <v-btn text>About</v-btn>
+        <v-btn text @click="goToAbout">About</v-btn>
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
@@ -13,6 +13,7 @@
         @click.stop="drawer = !drawer"
         class="hidden-md-and-up"
       ></v-app-bar-nav-icon>
+      <v-icon @click="$store.commit('changeCart', true)">mdi-cart</v-icon>
 
       <v-dialog
         v-model="credentialDialog"
@@ -328,6 +329,15 @@ export default {
         this.tab = "tab-2";
         this.credentialDialog = true;
       }
+    },
+    goToHome() {
+      this.$router.push("/");
+    },
+    goToAbout() {
+      this.$router.push("/about");
+    },
+    goToProducts() {
+      this.$router.push("/products");
     },
   },
 

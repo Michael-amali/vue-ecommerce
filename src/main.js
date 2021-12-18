@@ -25,6 +25,8 @@ Vue.use(VueCarousel);
 import Vue2Filters from "vue2-filters";
 Vue.use(Vue2Filters);
 
+import store from "./store.js";
+
 Vue.use(VueFirestore, {
   key: "id", // the name of the property. Default is '.key'.
   enumerable: true, //  whether it is enumerable or not. Default is true.
@@ -34,6 +36,7 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   vuetify,
   render: (h) => h(App),
 }).$mount("#app");

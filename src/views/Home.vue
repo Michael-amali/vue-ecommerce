@@ -51,14 +51,14 @@
                     <v-card-text>
                       {{ product.description }}
                     </v-card-text>
-                    <v-card-action class="d-flex justify-center">
+                    <div class="d-flex justify-center">
                       <AddToCart
-                        :product-image="getImage(product.images)"
-                        :product-id="product.id"
+                        :productImage="getImage(product.images)"
+                        :productId="product.id"
                         :price="product.price"
                         :name="product.name"
                       />
-                    </v-card-action>
+                    </div>
                   </v-card>
                 </v-flex>
                 <!-- <v-flex xs12 md4>
@@ -109,6 +109,67 @@
           </v-flex>
         </v-layout>
       </section>
+      <!-- cart pop up -->
+      <MiniCart />
+      <!-- <v-dialog
+        v-model="this.$store.state.cartDialog"
+        max-width="590"
+        persistent
+      >
+        <v-card>
+          <v-btn
+            class="fixed"
+            color=""
+            dark
+            x-small
+            absolute
+            fab
+            @click="closeCartDialog"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-card-title class="text-h5"> My Bag </v-card-title>
+          <v-divider></v-divider>
+
+          <v-card-text>
+            <ul>
+              <div v-for="(item, idx) in this.$store.state.cart" :key="idx">
+                <v-row>
+                  <v-col cols="4">
+                    <v-img :src="item.product_image" width="120px"></v-img>
+                  </v-col>
+                  <v-col cols="8" class="my-auto">
+                    <div class="title">{{ item.productName }}</div>
+                    <div class="body-1">
+                      {{ item.productPrice | currency("₵") }}
+                    </div>
+                  </v-col>
+                </v-row>
+              </div>
+            </ul>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+              color="primary darken-1"
+              text
+              @click="$store.commit('changeCart', false)"
+            >
+              Continue Shopping
+            </v-btn>
+
+            <v-btn
+              color="primary darken-1"
+              text
+              @click="this.$store.commit('changeCart', false)"
+            >
+              Checkout
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog> -->
       <section>
         <v-parallax
           src="https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2Fo-NIGHTCLUB-facebook.jpg?alt=media&token=cefc5c4c-9714-41da-9c22-f63caf5e89a4"
@@ -167,47 +228,50 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import AddToCart from "@/components/AddToCart.vue";
+import MiniCart from "@/components/MiniCart.vue";
 export default {
   name: "Home",
 
   components: {
     Navbar,
     AddToCart,
+    MiniCart,
   },
   data() {
     return {
+      // cartDialog: false,
       products: [
         {
-          name: "Watch 1",
+          name: "Shorts",
           description:
             "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
           images: [
             "https://res.cloudinary.com/cloudfisk/image/upload/v1628246011/catalog/images/large/short1.jpg",
             "https://res.cloudinary.com/cloudfisk/image/upload/v1628246011/catalog/images/large/short1.jpg",
           ],
-          price: 99.99,
+          price: "99.99",
           id: "1",
         },
         {
-          name: "Watch 2",
+          name: "Blue Shirt",
           description:
             "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
           images: [
             "https://res.cloudinary.com/cloudfisk/image/upload/v1628246012/catalog/images/large/blue-tshirt1.jpg",
             "../assets/svg/product.svg",
           ],
-          price: 99.92,
+          price: "99.92",
           id: "2",
         },
         {
-          name: "Watch 3",
+          name: "Brown Suit",
           description:
             "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
           images: [
             "https://res.cloudinary.com/cloudfisk/image/upload/v1628246000/catalog/images/large/suit002.jpg",
             "../assets/svg/product.svg",
           ],
-          price: 99.97,
+          price: "99.97",
           id: "3",
         },
       ],
@@ -217,6 +281,20 @@ export default {
     getImage(images) {
       return images[0];
     },
+    // closeCartDialog() {
+    //   this.$store.commit("changeCart", false);
+    // },
   },
 };
 </script>
+
+<style scoped>
+.fixed {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  margin: 16px;
+}
+</style>
