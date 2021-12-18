@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn color="primary darken-1">Add to Cart</v-btn>
+    <v-btn @click="addToCart" color="primary darken-1">Add to Cart</v-btn>
   </div>
 </template>
 
@@ -8,19 +8,29 @@
 export default {
   name: "AddToCart",
   components: {},
-  props: {
-    name: String,
-    price: String,
-    productId: String,
-  },
+  props: ["name", "price", "productId", "productImage", "cartDialog"],
 
   data() {
     return {
-      productName: this.name,
-      productPrice: this.price,
-      product_id: this.id,
+      item: {
+        productName: this.name,
+        productPrice: this.price,
+        product_id: this.productId,
+        product_image: this.productImage,
+        productQuantity: 1,
+      },
     };
   },
-  methods: {},
+  methods: {
+    addToCart() {
+      this.$store.commit("addToCart", this.item);
+      this.changeCart();
+      // recalcultating the price as the quantity changes.
+      this.item.productPrice = this.price * this.item.productQuantity;
+    },
+    changeCart() {
+      this.$store.commit("changeCart", true);
+    },
+  },
 };
 </script>
