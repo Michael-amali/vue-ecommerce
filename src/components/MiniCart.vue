@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-dialog v-model="this.$store.state.cartDialog" max-width="590" persistent>
+    <v-dialog
+      v-model="this.$store.state.cartDialog"
+      max-width="590"
+      persistent
+      :scrollable="true"
+    >
       <v-card>
         <v-btn
           class="fixed"
@@ -18,7 +23,14 @@
 
         <v-card-text>
           <ul>
-            <div v-for="(item, idx) in this.$store.state.cart" :key="idx">
+            <div v-if="this.$store.state.cart.length == 0" class="title">
+              No item in Cart
+            </div>
+            <div
+              v-else
+              v-for="(item, idx) in this.$store.state.cart"
+              :key="idx"
+            >
               <v-row>
                 <v-col cols="4">
                   <v-img :src="item.product_image" width="120px"></v-img>
@@ -41,21 +53,19 @@
             </div>
           </ul>
         </v-card-text>
-
+        <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn
-            color="primary darken-1"
-            text
+            outlined
+            color="indigo"
             @click="$store.commit('changeCart', false)"
           >
             Continue Shopping
           </v-btn>
 
-          <v-btn color="primary darken-1" outlined text @click="checkoutFxn">
-            Checkout
-          </v-btn>
+          <v-btn color="indigo" outlined @click="checkoutFxn"> Checkout </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -78,6 +88,7 @@ export default {
       this.$router.push("/checkout");
     },
   },
+  computed: {},
 };
 </script>
 

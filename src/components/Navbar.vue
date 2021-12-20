@@ -1,10 +1,10 @@
 <template>
   <v-card class="">
     <v-app-bar color="deep-purple accent-4" dark fixed>
-      <v-toolbar-title>Akata</v-toolbar-title>
+      <v-toolbar-title @click="goToHome" class="logo">Akata</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn text @click="goToHome">Home</v-btn>
-        <v-btn text>Products</v-btn>
+        <v-btn text @click="goToProducts">Products</v-btn>
         <v-btn text @click="goToAbout">About</v-btn>
       </v-toolbar-items>
 
@@ -13,7 +13,15 @@
         @click.stop="drawer = !drawer"
         class="hidden-md-and-up"
       ></v-app-bar-nav-icon>
-      <v-icon @click="$store.commit('changeCart', true)">mdi-cart</v-icon>
+
+      <v-badge left color="red" class="hidden-sm-and-down">
+        <span slot="badge">{{ this.$store.state.itemsInCart }}</span>
+        <v-icon
+          @click="$store.commit('changeCart', true)"
+          class="hidden-sm-and-down"
+          >mdi-cart</v-icon
+        >
+      </v-badge>
 
       <v-dialog
         v-model="credentialDialog"
@@ -68,7 +76,13 @@
                             name="password"
                             :rules="loginPasswordRules"
                             v-model="loginPassword"
-                            type="password"
+                            :append-icon="
+                              loginPasswordShow ? 'mdi-eye' : 'mdi-eye-off'
+                            "
+                            @click:append="
+                              loginPasswordShow = !loginPasswordShow
+                            "
+                            :type="loginPasswordShow ? 'text' : 'password'"
                             color="primary"
                             required
                             placeholder="Password"
@@ -131,7 +145,13 @@
                             name="password"
                             :rules="signUpPasswordRules"
                             v-model="signUpPassword"
-                            type="password"
+                            :append-icon="
+                              signUpPasswordShow ? 'mdi-eye' : 'mdi-eye-off'
+                            "
+                            @click:append="
+                              signUpPasswordShow = !signUpPasswordShow
+                            "
+                            :type="signUpPasswordShow ? 'text' : 'password'"
                             color="primary"
                             required
                             placeholder="Password"
@@ -218,17 +238,18 @@ export default {
         { title: "signUp", icon: "kodi", text: "Sign Up" },
         { title: "product", icon: "redhat", text: "Products" },
         { title: "about", icon: "poker-chip", text: "About" },
+        { title: "about", icon: "cart", text: "Cart" },
       ],
       credentialDialog: false,
       tab: "tab-1",
       loginEmail: "",
       loginPassword: "",
+      loginPasswordShow: false,
       signUpName: "",
       signUpEmail: "",
       signUpPassword: "",
+      signUpPasswordShow: false,
       message: "",
-      onlyMessage: "",
-      paymentOption: null,
       loadingBtn: false,
       loading: false,
       loginFormValid: true,
@@ -236,7 +257,6 @@ export default {
       snackBarText: "",
       snackbar: false,
       upgradeValue: null,
-      paymentOptions: ["Stripe", "Paypal"],
       nameRules: [(value) => !!value || "Name is required"],
       loginEmailRules: [
         (value) => !!value || "E-mail is required",
@@ -328,6 +348,12 @@ export default {
       } else if (item.text == "Sign Up") {
         this.tab = "tab-2";
         this.credentialDialog = true;
+      } else if (item.text == "Cart") {
+        this.$store.commit("changeCart", true);
+      } else if (item.text == "Products") {
+        this.goToProducts();
+      } else if (item.text == "About") {
+        this.goToAbout();
       }
     },
     goToHome() {
@@ -345,4 +371,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.logo:hover {
+  cursor: pointer;
+}
+</style>
