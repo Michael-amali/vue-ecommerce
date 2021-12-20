@@ -4,12 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 let localCart = window.localStorage.getItem("cart");
+let localCartItems = window.localStorage.getItem("itemsInCart");
+let localTotalPrice = window.localStorage.getItem("sum");
 
 export default new Vuex.Store({
   state: {
     cart: localCart ? JSON.parse(localCart) : [],
     cartDialog: null,
-    sum: null,
+    sum: localTotalPrice ? JSON.parse(localTotalPrice) : 0,
+    itemsInCart: localCartItems ? JSON.parse(localCartItems) : 0,
   },
   mutations: {
     addToCart(state, item) {
@@ -21,7 +24,9 @@ export default new Vuex.Store({
       } else {
         state.cart.push(item);
       }
+      state.itemsInCart++;
 
+      this.commit("getTotalPrice", state.cart);
       this.commit("saveData");
     },
     changeCart(state, item) {
@@ -29,18 +34,27 @@ export default new Vuex.Store({
     },
     saveData(state) {
       window.localStorage.setItem("cart", JSON.stringify(state.cart));
+      window.localStorage.setItem(
+        "itemsInCart",
+        JSON.stringify(state.itemsInCart)
+      );
+      window.localStorage.setItem("sum", JSON.stringify(state.sum));
     },
 
     removeFromCart(state, item) {
       let itemPosition = state.cart.indexOf(item);
       state.cart.splice(itemPosition, 1);
+      state.itemsInCart = state.itemsInCart - item.productQuantity;
+      this.commit("getTotalPrice", state.cart);
       this.commit("saveData");
     },
 
     getTotalPrice(state, cartData) {
       state.sum = 0;
       cartData.forEach((item) => {
-        state.sum = state.sum + parseFloat(item.productPrice);
+        state.sum =
+          state.sum +
+          parseFloat(item.productPrice) * parseInt(item.productQuantity);
       });
       return state.sum;
     },
