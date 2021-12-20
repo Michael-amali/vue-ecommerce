@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="my-0 mx-auto pa-0">
     <Navbar />
-    <v-content>
+    <v-main>
       <section>
         <v-parallax
           src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
@@ -11,8 +11,9 @@
               The Revolution Will Not Be Televised
             </div>
             <em
-              >With the power of Endorfine you don't need to be famous or post
-              pics of cute cats in order to get visibility</em
+              >When life is too easy for us, we must beware or we may not be
+              ready to meet the blows which sooner or later come to everyone,
+              rich or poor.</em
             >
           </v-layout>
         </v-parallax>
@@ -210,7 +211,7 @@
             <v-flex xs12 sm4 offset-sm1>
               <v-card class="elevation-0 transparent">
                 <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">We are hiring</div>
+                  <div class="headline">Inspiring creativity</div>
                 </v-card-title>
                 <v-card-text>
                   Are you a creative person? Do you like techy stuff? Complete
@@ -221,7 +222,8 @@
           </v-layout>
         </v-container>
       </section>
-    </v-content>
+    </v-main>
+    <Footer />
   </v-container>
 </template>
 
@@ -229,6 +231,8 @@
 import Navbar from "@/components/Navbar.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import MiniCart from "@/components/MiniCart.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
   name: "Home",
 
@@ -236,6 +240,7 @@ export default {
     Navbar,
     AddToCart,
     MiniCart,
+    Footer,
   },
   data() {
     return {
@@ -258,7 +263,7 @@ export default {
             "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
           images: [
             "https://res.cloudinary.com/cloudfisk/image/upload/v1628246012/catalog/images/large/blue-tshirt1.jpg",
-            "../assets/svg/product.svg",
+            "https://res.cloudinary.com/cloudfisk/image/upload/v1628246012/catalog/images/large/blue-tshirt1.jpg",
           ],
           price: "99.92",
           id: "2",
@@ -269,7 +274,7 @@ export default {
             "Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making go",
           images: [
             "https://res.cloudinary.com/cloudfisk/image/upload/v1628246000/catalog/images/large/suit002.jpg",
-            "../assets/svg/product.svg",
+            "https://res.cloudinary.com/cloudfisk/image/upload/v1628246000/catalog/images/large/suit002.jpg",
           ],
           price: "99.97",
           id: "3",

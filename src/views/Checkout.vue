@@ -9,7 +9,10 @@
 
           <v-card-text>
             <ul>
-              <div v-for="(item, idx) in this.$store.state.cart" :key="idx">
+              <div v-if="this.$store.state.cart.length == 0" class="title">
+                No item Available
+              </div>
+              <div v-else v-for="(item, idx) in cartComputed" :key="idx">
                 <v-row>
                   <v-col cols="4">
                     <v-img :src="item.product_image" width="120px"></v-img>
@@ -37,28 +40,31 @@
         </v-col>
         <v-col cols="4">
           <v-card-title class="text-h5"
-            >Total Price: {{ getPrice() }}
+            >Total Price:
             {{ this.$store.state.sum | currency("₵") }}</v-card-title
           >
           <v-divider></v-divider>
         </v-col>
       </v-row>
     </v-container>
+    <MiniCart />
   </v-container>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import MiniCart from "../components/MiniCart.vue";
 export default {
   name: "Checkout",
-  components: { Navbar },
+  components: { Navbar, MiniCart },
 
   data() {
     return {};
   },
-  methods: {
-    getPrice() {
-      this.$store.commit("getTotalPrice", this.$store.state.cart);
+  methods: {},
+  computed: {
+    cartComputed() {
+      return this.$store.state.cart;
     },
   },
 };

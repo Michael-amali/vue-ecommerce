@@ -5,6 +5,7 @@ import vuetify from "./plugins/vuetify";
 import Swal from "sweetalert2";
 import VueFirestore from "vue-firestore";
 require("firebase/firestore");
+import { auth } from "./firebase.js";
 
 window.Swal = Swal;
 
@@ -34,9 +35,15 @@ Vue.use(VueFirestore, {
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: (h) => h(App),
-}).$mount("#app");
+// route protection - allows redirection to protected routes if user is not logged out
+let app = "";
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    new Vue({
+      router,
+      store,
+      vuetify,
+      render: (h) => h(App),
+    }).$mount("#app");
+  }
+});
