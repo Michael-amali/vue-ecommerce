@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.commit("addToCart", this.item);
+      this.$store.dispatch("addToCart", this.item);
       this.changeCart();
       // recalcultating the price as the quantity changes.
       this.item.productPrice = this.price * this.item.productQuantity;

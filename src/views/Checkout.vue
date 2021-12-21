@@ -62,6 +62,8 @@ export default {
     return {};
   },
   methods: {},
+
+  // The recommended way is to return the state in a computed property[As done below], than to call "this.$store..." in the template tag.
   computed: {
     cartComputed() {
       return this.$store.state.cart;
