@@ -24,7 +24,8 @@
                     <!-- <v-card-text class="text-start pa-0 text-h6">
                       Add Product
                     </v-card-text> -->
-                    <v-card-title class="pa-0"> Add Product </v-card-title>
+                    <v-card-title class="pa-0" v-if="this.modal == 'add'"> Add Product </v-card-title>
+                    <v-card-title class="pa-0" v-if="this.modal == 'edit'"> Edit Product </v-card-title>
                     <v-divider></v-divider>
                     <v-row>
                       <v-col cols="12" sm="6" md="7">

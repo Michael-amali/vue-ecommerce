@@ -10,7 +10,7 @@
 
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon
-        @click.stop="drawer = !drawer"
+        @click="drawer = !drawer"
         class="hidden-md-and-up"
       ></v-app-bar-nav-icon>
 
@@ -22,6 +22,7 @@
           >mdi-cart</v-icon
         >
       </v-badge>
+      <span class="mx-1"></span>
 
       <v-dialog
         v-model="credentialDialog"
@@ -184,7 +185,7 @@
       </v-dialog>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary height="100vh">
+    <v-navigation-drawer v-model="drawer" flat app temporary>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
