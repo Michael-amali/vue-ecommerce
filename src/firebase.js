@@ -12,12 +12,12 @@ Vue.use(VueFiretore, {
 });
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD58QK4lL52xv_WTNcmwtsaB0q1RIozZJU",
-  authDomain: "vue-super.firebaseapp.com",
-  projectId: "vue-super",
-  storageBucket: "vue-super.appspot.com",
-  messagingSenderId: "732275062308",
-  appId: "1:732275062308:web:148acb8bfe7cff82c20ab1",
+  apiKey: process.env.VUE_APP_FIREBASE_APIKEY,
+  authDomain: process.env.VUE_APP_AUTHDOMAIN,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
