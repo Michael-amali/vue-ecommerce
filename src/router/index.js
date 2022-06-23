@@ -8,6 +8,7 @@ import Orders from "../views/Orders.vue";
 import Profile from "../views/Profile.vue";
 import Checkout from "../views/Checkout.vue";
 import UserProducts from "../views/UserProducts.vue";
+import NotFound from "../views/NotFound";
 import { auth } from "../firebase.js";
 
 Vue.use(VueRouter);
@@ -62,6 +63,11 @@ const routes = [
     path: "/products",
     name: "UserProducts",
     component: UserProducts,
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 
