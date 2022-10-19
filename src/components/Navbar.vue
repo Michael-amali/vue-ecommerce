@@ -1,6 +1,6 @@
 <template>
   <v-card class="">
-    <v-app-bar color="deep-purple accent-4" dark fixed>
+    <v-app-bar color="deep-purple accent-4" dark fixed app>
       <v-toolbar-title @click="goToHome" class="logo">Akata</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn text @click="goToHome">Home</v-btn>
@@ -226,7 +226,9 @@
 </template>
 <script>
 import { auth, db } from "../firebase.js";
-
+import introJS from "intro.js";
+import "intro.js/introjs.css";
+import "intro.js/minified/introjs.min.css";
 export default {
   name: "Navbar",
   data() {
@@ -369,6 +371,10 @@ export default {
   },
 
   components: {},
+
+  mounted() {
+    introJS().start();
+  },
 };
 </script>
 

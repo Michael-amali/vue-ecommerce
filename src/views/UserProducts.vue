@@ -2,7 +2,7 @@
   <v-container fluid class="my-0 mx-auto pa-0">
     <Navbar />
     <section>
-      <v-container class="mt-16">
+      <v-container class="">
         <v-row class="pa-4">
           <v-col class="col-md-6 my-auto">
             <p class="text-center text-h4">IN PROGRESS</p>

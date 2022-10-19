@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="my-0 mx-auto pa-0">
     <Navbar />
-    <v-container class="mt-16 d-flex justify-center">
+    <v-container class="d-flex justify-center">
       <v-row class="mt-16">
         <v-col cols="8">
           <v-card-title class="text-h5">Checkout Page</v-card-title>
