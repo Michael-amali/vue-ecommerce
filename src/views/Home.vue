@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="my-0 mx-auto pa-0">
     <Navbar />
-    <v-main>
+    <div>
       <section>
         <v-parallax
           src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
@@ -222,7 +222,7 @@
           </v-layout>
         </v-container>
       </section>
-    </v-main>
+    </div>
     <Footer />
   </v-container>
 </template>

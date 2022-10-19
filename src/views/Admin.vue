@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="deep-purple accent-4" dense dark height="65">
+    <v-app-bar color="deep-purple accent-4" dense dark height="65" app>
       <v-app-bar-nav-icon @click="mini = !mini"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Roll It Tight</v-toolbar-title>
